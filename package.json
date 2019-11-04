@@ -1,0 +1,22 @@
+{
+  "name": "exatamuseum",
+  "version": "1.0.0",
+  "description": "microservicio Museum",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/albertoaguilar1/exataMuseum.git"
+  },
+  "keywords": [
+    "museum"
+  ],
+  "author": "jaguilarh",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/albertoaguilar1/exataMuseum/issues"
+  },
+  "homepage": "https://github.com/albertoaguilar1/exataMuseum#readme"
+}
