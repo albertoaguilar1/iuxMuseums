@@ -34,6 +34,14 @@ router.route('/museums/:museums_id')
 
 
 
+router.route('/museums/piece/:museums_id')
+.put(museumsController.findOneAndUpdate);
+
+
+
+
+
+
 router.get('/',function(req,res){
     res.json({
         status:'API ITS working',

@@ -1,6 +1,7 @@
 // MuseumsController.js
 // Import user model
-var Museums = require('./model/MuseumsModel');
+var Museums = require('./model/museumsModel');
+
 
 
 
@@ -42,6 +43,40 @@ exports.view = function (req, res) {
 };
 
 
+
+// Handle update user info
+exports.findOneAndUpdate = function (req, res) {
+    Museums.findOneAndUpdate(req.params.museums_id,
+        { $push: { Pieces : req.body.Pieces} } 
+        
+        ,function (err, museums) {
+   
+  
+    
+                console.log("req.params.museums_id IS: " +   req.params.museums_id); 
+                console.log("Pieces IS: " +   req.body.Pieces); 
+
+        if (err)
+            res.send(err);
+     
+   
+         
+           
+// save the user and check for errors
+            museums.save(function (err) {
+            if (err)
+                res.json(err);
+            res.json({
+                message: 'museums Info updated',
+                data: museums
+            });
+        });
+    });
+};
+
+
+
+
 // Handle create museums actions
 exports.new = function (req, res) {
     var museums = new Museums();
@@ -55,7 +90,7 @@ exports.new = function (req, res) {
 
 
     console.log("REQ.BODY.lastname IS: " + req.body.NameMuseum);
-    console.log("REQ.BODY.lastname IS: " + req.body.DescriptMuseum);
+    console.log("REQ.BODY.lastname IS: " + req.body.Pieces);
   
 // save the museums and check for errors
 museums.save(function (err) {
@@ -95,6 +130,12 @@ exports.update = function (req, res) {
         });
     });
 };
+
+
+
+
+
+
 // Handle delete user
 exports.delete = function (req, res) {
     Museums.remove({

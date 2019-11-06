@@ -17,11 +17,15 @@ TokenMuseum: {
 },
 
 Pieces:
-   
-        [
-            { type : mongoose.Schema.Types.ObjectId, ref : 'Pieces' }
+           [
+        
+         
+            { type : 
+                mongoose.Schema.Types.ObjectId, 
+                ref : 'Pieces' 
+            }
         ]  
-
+    
 });
 
 
