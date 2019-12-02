@@ -9,6 +9,9 @@ let app = express();
 
 // Import routes
 let apiRoutes = require('./api-routes');
+let swaggerUi = require('swagger-ui-express');
+let swaggerDocument = require('./swagger.json');
+
 // Configure bodyparser to handle post requests
 app.use(bodyParser.urlencoded({
     extended: true
@@ -17,8 +20,11 @@ app.use(bodyParser.json());
 // Connect to Mongoose and set connection variable
 
 //mongoose.connect('mongodb://localhost:27017/museum_db', { useNewUrlParser: true});
+var mongo_host = (process.env.MONGO_SERVICE_HOST || 'localhost' );
+var mongo_port = (process.env.MONGO_SERVICE_PORT || 27017 );
+var url = 'mongodb://'+mongo_host+':'+mongo_port+'/museum_db';
 
-mongoose.connect('mongodb://localhost:27017/museum_db', {
+mongoose.connect(url, {
     useUnifiedTopology: true,
     useNewUrlParser: true})
     .then(() => console.log("Connected to Database"))
@@ -30,6 +36,8 @@ var db = mongoose.connection;
 var port = process.env.PORT || 8081;
 
 // Send message for default URL
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
+
 
 app.get('/', (req, res) => res.send('Hello World with Express Museum'));
 

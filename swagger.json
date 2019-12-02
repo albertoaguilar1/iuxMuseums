@@ -1,0 +1,230 @@
+{
+    "swagger": "2.0",
+    "info": {
+      "version": "1.0.0",
+      "title": "IUX API Museums",
+      "description": " API CRUD de Museums",
+      "license": {
+        "name": "MIT",
+        "url": "https://opensource.org/licenses/MIT"
+      }
+    },
+    "host": "localhost:8081",
+    "basePath": "/api/",
+    "tags": [
+      {
+        "name": "Api:Museums",
+        "description": "API para el manejo de operaciones con Museums"
+      }
+    ],
+    "schemes": [
+      "http"
+    ],
+    "consumes": [
+      "application/json"
+    ],
+    "produces": [
+      "application/json"
+    ],
+    "paths": {
+      "/museums": {
+
+        "post": {
+          "tags": [
+            ""
+          ],
+          "description": "Create new Museums in system",
+          "parameters": [
+            {
+              "name": "Museums",
+              "in": "body",
+              "description": "User that we want to create",
+              "schema": {
+                "$ref": "#/definitions/Museums"
+              }
+            }
+          ],
+          "produces": [
+            "application/json"
+          ],
+          "responses": {
+            "200": {
+              "description": "New event is created",
+              "schema": {
+                "$ref": "#/definitions/Museums"
+              }
+            }
+          }
+        }
+        ,
+
+        "get": {
+          "tags": [
+            "Museums"
+          ],
+          "summary": "Get all Museums in system",
+          "responses": {
+            "200": {
+              "description": "OK",
+              "schema": {
+                "$ref": "#/definitions/Museums"
+              }
+            }
+          }
+        }
+      },
+      "/museums/{museumsId}": {
+        "parameters": [
+          {
+            "name": "museums",
+            "in": "path",
+            "required": true,
+            "description": "ID of museums that we want to find",
+            "type": "string"
+          }
+        ],
+        "get": {
+          "tags": [
+            "Museums"
+          ],
+          "summary": "Get Museums with given ID",
+          "responses": {
+            "200": {
+              "description": "User is found",
+              "schema": {
+                "$ref": "#/definitions/Museums"
+              }
+            }
+          }
+        },
+        "delete": {
+          "summary": "Delete museums with given ID",
+          "tags": [
+            "Museums"
+          ],
+          "responses": {
+            "200": {
+              "description": "museums is deleted",
+              "schema": {
+                "$ref": "#/definitions/Museums"
+              }
+            }
+          }
+        },
+        "put": {
+          "summary": "Update museums with give ID",
+          "tags": [
+            "Museums"
+          ],
+          "parameters": [
+            {
+              "name": "museums",
+              "in": "body",
+              "description": "User with new values of properties",
+              "schema": {
+                "$ref": "#/definitions/Museums"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Museums is updated",
+              "schema": {
+                "$ref": "#/definitions/Museums"
+              }
+            }
+          }
+        }
+      }
+    },
+    "definitions": {
+      "Museums": {
+        "required": [
+          
+          
+            "DateBeginEvent",
+            "DateEndEvent",
+            "NameEvent",
+            "DescriptEvent",
+            "OffertEvent",
+            "ImgEvent",
+            "StatusEvent"
+        ],
+        "properties": {
+          "_id": {
+            "type": "string",
+            "uniqueItems": true
+          },
+          "DateBeginEvent": {
+            "type": "date",
+            "uniqueItems": true
+          },
+          "DateEndEvent": {
+            "type": "date",
+            "uniqueItems": true
+          },
+          "NameEvent": {
+            "type": "string",
+            "uniqueItems": true
+          },
+          "DescriptEvent": {
+            "type": "string",
+            "uniqueItems": true
+          },
+          "OffertEvent": {
+            "type": "string",
+            "uniqueItems": true
+          },
+          "ImgEvent": {
+            "type": "boolean",
+            "uniqueItems": true
+          },
+          "StatusEvent": {
+            "type": "boolean",
+            "uniqueItems": true
+          }
+         
+        }
+      }
+    },
+
+      "Pieces": {
+        "required": [
+         "NamePieces",
+         "DescripPieces",
+         "ImgPieces",
+         "TokenPiece"
+          
+         
+        ],
+        "properties": {
+          "_id": {
+            "type": "string",
+            "uniqueItems": true
+          },
+          
+          "NamePieces": {
+            "type": "string",
+            "uniqueItems": true
+          },
+          "DescripPieces": {
+            "type": "string",
+            "uniqueItems": true
+          },
+          "ImgPiecesen": {
+            "type": "string",
+            "uniqueItems": true
+          },
+          "TokenPiece": {
+            "type": "boolean",
+            "uniqueItems": true
+          }
+         
+        }
+      }
+    }
+
+
+
+
+  
