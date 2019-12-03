@@ -27,8 +27,8 @@ var url = 'mongodb://'+mongo_host+':'+mongo_port+'/museum_db';
 mongoose.connect(url, {
     useUnifiedTopology: true,
     useNewUrlParser: true})
-    .then(() => console.log("Connected to Database"))
-    .catch(err => console.error("Error connecting db", err));
+    .then(() => console.log("Connected to Database"+"____"+url))
+    .catch(err => console.error("Error connecting db", err + url));
 
 var db = mongoose.connection;
 
