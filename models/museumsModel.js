@@ -1,6 +1,10 @@
-// MuseumModel.js
-var mongoose = require('mongoose');
-// Setup schema
+'use strict'
+// Cargamos el módulo de mongoose
+var mongoose =  require('mongoose');
+
+// Usaremos los esquemas
+// Creamos el objeto del esquema y sus atributos
+
 var MuseumsSchema = mongoose.Schema({
   //  museum_id: mongoose.Schema.Types.ObjectId,
   NameMuseum: {

@@ -1,11 +1,17 @@
-//inicializa express router
-let router = require('express').Router();
+  
+'use strict'
+// Cargamos el módulo de express para poder crear rutas
+var express = require('express');
+// Llamamos al router
+var router = express.Router();
 
-//set deafuilt API RESPONSE 
+
 
 //Import museumsController
-var museumsController = require('./museumsController');
-var piecesController = require('./piecesController');
+var museumsController = require('../controllers/museumsController');
+
+//Import piecesController
+var piecesController = require('../controllers/piecesController');
   
 
     // Contact routes
@@ -44,19 +50,11 @@ router.route('/museums/piece/:museums_id')
 
 router.get('/',function(req,res){
     res.json({
-        status:'API ITS working',
-        message:'Welcome to restHub crafted with lovesssss!'
+        status:'API Museum WORKING',
+        message:'Bienvenido a la raiz del servicio'
     });
 });
 
-    router.get('/login',function(req,res){
-        res.json({
-
-            status:'API ITS working',
-            message:'Welcome to restHub crafted with lovex!'
-        });
-
-});
 
 
 

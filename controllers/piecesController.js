@@ -1,6 +1,6 @@
-// MuseumsController.js
-// Import user model
-var Pieces = require('./model/piecesModel');
+'use strict'
+// Cargamos los modelos para usarlos posteriormente
+var Pieces = require('../models/piecesModel');
 
 
 
