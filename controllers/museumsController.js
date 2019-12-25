@@ -1,6 +1,7 @@
 'use strict'
 // Cargamos los modelos para usarlos posteriormente
 var Museums = require('../models/museumsModel');
+var Pieces = require('../models/piecesModel');
 
 
 
@@ -23,6 +24,51 @@ exports.index = function (req, res) {
     });
 };
 
+exports.viewName= (req, res) => {
+    console.log("viewName"+req.params.NameMuseum); 
+  // Validate request
+  if(!req.params.NameMuseum) {
+    return res.status(400).send({
+        message: "museum  NameMuseum can not be empty"
+    });
+}
+
+
+    Museums.findOne({NameMuseum:req.params.NameMuseum})
+    .populate('Pieces')
+    .exec()
+    .then(museum => {
+        if(!museum) {
+            return res.status(404).send({
+                message: "Museum not found with NameMuseum " +  req.params.NameMuseum,
+                status:'400',
+                data: err
+            });            
+        }
+
+          
+        return res.status(200).send({
+            status: "success",
+            message: "Museum found",
+            data: museum
+        });
+   
+    }).catch(err => {
+        if(err.kind === 'NameMuseum') {
+            return res.status(404).send({
+                message: "Museum  not found with NameMuseum " + req.params.NameMuseum,
+                status:'404',
+                data: err
+            });                
+        }
+        return res.status(500).send({
+            message: "Error retrieving Museum with NameMuseum " + req.params.NameMuseum,
+            status:'500',
+            data: err
+        });
+    });
+};
+
 
 
 
@@ -37,7 +83,10 @@ exports.view= (req, res) => {
     });
 }
 
+
     Museums.findById (req.params.museums_id)
+    .populate('Pieces')
+    .exec()
     .then(museum => {
         if(!museum) {
             return res.status(404).send({
@@ -46,6 +95,8 @@ exports.view= (req, res) => {
                 data: err
             });            
         }
+
+          
         return res.status(200).send({
             status: "success",
             message: "Museum found",

@@ -23,6 +23,48 @@ exports.index = function (req, res) {
 };
 
 
+//Handle view pieces info
+exports.viewName= (req, res) => {
+    console.log("viewName"); 
+  // Validate request
+  if(!req.params.NamePieces) {
+    return res.status(400).send({
+        message: "Piece  NamePieces can not be empty"
+    });
+}
+
+    Pieces.findOne({NamePieces:req.params.NamePieces})
+    .then(pieces => {
+        if(!pieces) {
+            return res.status(404).send({
+                message: "Pieces not found with NamePieces " + req.params.NamePieces,
+                status:'400',
+                data: err
+            });            
+        }
+        return res.status(200).send({
+            status: "success",
+            message: "Pieces found",
+            data: pieces
+        });
+   
+    }).catch(err => {
+        if(err.kind === 'ObjectId') {
+            return res.status(404).send({
+                message: "Pieces not found with id " + req.params.NamePieces,
+                status:'404',
+                data: err
+            });                
+        }
+        return res.status(500).send({
+            message: "Error retrieving Pieces with id " + req.params.NamePieces,
+            status:'500',
+            data: err
+        });
+    });
+};
+
+
 // Handle view pieces info
 exports.view= (req, res) => {
     console.log("view"); 
@@ -191,7 +233,7 @@ exports.delete = (req, res) => {
 
     Pieces.findByIdAndRemove(req.params.pieces_id)
     .then(pieces => {
-        if(!users) {
+        if(!pieces) {
             return res.status(404).send({
                 message: "Piece not found with id " + req.params.pieces_id,
                 status:'404',

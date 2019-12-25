@@ -4,9 +4,6 @@
 var express = require('express');
 // Llamamos al router
 var router = express.Router();
-
-
-
 //Import museumsController
 var museumsController = require('../controllers/museumsController');
 
@@ -25,7 +22,8 @@ var piecesController = require('../controllers/piecesController');
     .put(piecesController.update)
     .delete(piecesController.delete);
 
-
+    router.route('/pieces/name/:NamePieces')
+    .get(piecesController.viewName);
 
     // Contact routes
 router.route('/museums')
@@ -38,10 +36,13 @@ router.route('/museums/:museums_id')
 .put(museumsController.update)
 .delete(museumsController.delete);
 
+router.route('/museum/name/:NameMuseum')
+.get(museumsController.viewName);
 
 
 router.route('/museums/piece/:museums_id')
 .put(museumsController.findOneAndUpdate);
+
 
 
 

@@ -7,7 +7,8 @@ var bodyParser = require('body-parser');
 var app = express();
 // Importamos las rutas
 var museum_routes = require('./routes/api-routes'); 
-
+//cargamos morgan
+var morgan = require('morgan');
 // Cargamos la apide swageger para documetar 
 var swaggerUi = require('swagger-ui-express');
 var swaggerDocument = require('./swagger.json');
@@ -17,12 +18,9 @@ var swaggerDocument = require('./swagger.json');
 app.use(bodyParser.urlencoded({extended:true}));
 app.use(bodyParser.json());
 // Cargamos las rutas
-
-
-
-// Send message for default URL
-
-app.get('/', (req, res) => res.send('Hello World with Express Museum'));
+////////////////////////  Configuración para Morgan y creación del stream node.lo
+var fs = require('fs'); var util = require('util');
+app.use(morgan('combined', {stream: fs.createWriteStream(__dirname + '/node.log', {flags : 'a'})}));
 
 // Use Api routes in the App
 app.use('/api-docs/museum', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
@@ -50,6 +48,10 @@ app.use(function(err, req, res, next) {
         error: err
     });
 });
+
+
+// Send message for default URL
+app.get('/', (req, res) => res.send('Hello World with Express Museum'));
 
 // Exportamos la configuración
 module.exports = app;

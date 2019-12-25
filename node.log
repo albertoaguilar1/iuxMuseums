@@ -1,0 +1,2 @@
+::1 - - [25/Dec/2019:05:10:20 +0000] "GET /api/museum/name/SoumayaMuseum HTTP/1.1" 200 356 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/79.0.3945.79 Safari/537.36"
+::1 - - [25/Dec/2019:05:11:00 +0000] "GET /api/pieces/name/Soumaya HTTP/1.1" 200 207 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/79.0.3945.79 Safari/537.36"
