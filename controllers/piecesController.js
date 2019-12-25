@@ -109,13 +109,18 @@ exports.view= (req, res) => {
 
 
 
-// Create and Save a new pieces
+
+
+
+
+// Create and Save a new pieces 
 exports.new= (req, res) => {
-    console.log("new  " ); 
+ 
   // Validate request
-  if(!req.body) {
+  if(!req) {
+    console.log("asssa");
     return res.status(400).send({
-        message: "Piece body can not be empty"
+        message: "pieces body can not be empty"
     });
 }
 
@@ -126,37 +131,31 @@ exports.new= (req, res) => {
     });
     }*/
 
-
     var pieces = new Pieces();
-    pieces.NamePieces = req.body.NamePieces ? req.body.NamePieces : museums.NamePieces;
+    pieces.NamePieces = req.body.NamePieces ? req.body.NamePieces : pieces.NamePieces;
     pieces.DescripPieces = req.body.DescripPieces;
     pieces.ImgPieces = req.body.ImgPieces;
     pieces.TokenPiece = req.body.TokenPiece
 
-
-
-    // Save Pieces in the database
+    // Save Museum in the database
     pieces.save()
     .then(pieces => {
         return res.status(200).send({
-            message: 'New piece created!',
+            message: 'New pieces created!',
             status:"success",
             data: pieces
         });
     }).catch(err => {
 
-       
+        console.log("asssa");
         res.status(500).send({
-            message: err.message || "Some error occurred while creating the piece.",
+            message: err.message || "Some error occurred while creating the pieces.",
             status:'500',
             data: err
            
         });
     });
 };
-
-
-
 
 
 // Update a piece identified by the PieceId in the request

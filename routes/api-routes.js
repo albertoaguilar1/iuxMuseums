@@ -36,7 +36,7 @@ router.route('/museums/:museums_id')
 .put(museumsController.update)
 .delete(museumsController.delete);
 
-router.route('/museum/name/:NameMuseum')
+router.route('/museums/name/:NameMuseum')
 .get(museumsController.viewName);
 
 

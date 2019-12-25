@@ -50,9 +50,6 @@ app.use(function(err, req, res, next) {
 });
 
 
-// Send message for default URL
-app.get('/', (req, res) => res.send('Hello World with Express Museum'));
-
 // Exportamos la configuración
 module.exports = app;
 
