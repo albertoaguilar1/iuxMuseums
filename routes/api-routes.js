@@ -4,6 +4,8 @@
 var express = require('express');
 // Llamamos al router
 var router = express.Router();
+//cargamos la utilidad para verificar token
+var authenticated = require('../middlewares/authenticated');
 //Import museumsController
 var museumsController = require('../controllers/museumsController');
 
