@@ -175,6 +175,7 @@ exports.new= (req, res) => {
 
 // Handle update museum info
 exports.findOneAndUpdate = function (req, res) {
+    console.log("Pieces IS: " +   req.body.Pieces); 
     Museums.findOneAndUpdate(req.params.museums_id,
         { $push: { Pieces : req.body.Pieces} } 
         

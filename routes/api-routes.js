@@ -15,35 +15,35 @@ var piecesController = require('../controllers/piecesController');
 
     // Contact routes
     router.route('/pieces')
-    .get(piecesController.index)
-    .post(piecesController.new);
+    .get(authenticated,piecesController.index)
+    .post(authenticated,piecesController.new);
     
     router.route('/pieces/:pieces_id')
-    .get(piecesController.view)
-    .patch(piecesController.update)
-    .put(piecesController.update)
-    .delete(piecesController.delete);
+    .get(authenticated,piecesController.view)
+    .patch(authenticated,piecesController.update)
+    .put(authenticated,piecesController.update)
+    .delete(authenticated,piecesController.delete);
 
     router.route('/pieces/name/:NamePieces')
-    .get(piecesController.viewName);
+    .get(authenticated,piecesController.viewName);
 
     // Contact routes
 router.route('/museums')
-.get(museumsController.index)
-.post(museumsController.new);
+.get(authenticated,museumsController.index)
+.post(authenticated,museumsController.new);
 
 router.route('/museums/:museums_id')
-.get(museumsController.view)
-.patch(museumsController.update)
-.put(museumsController.update)
-.delete(museumsController.delete);
+.get(authenticated,museumsController.view)
+.patch(authenticated,museumsController.update)
+.put(authenticated,museumsController.update)
+.delete(authenticated,museumsController.delete);
 
 router.route('/museums/name/:NameMuseum')
-.get(museumsController.viewName);
+.get(authenticated,museumsController.viewName);
 
 
 router.route('/museums/piece/:museums_id')
-.put(museumsController.findOneAndUpdate);
+.put(authenticated,museumsController.findOneAndUpdate);
 
 
 
