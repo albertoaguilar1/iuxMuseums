@@ -25,7 +25,7 @@ var request2 = request2("http://localhost:8080")
             .send({EmailUser: email,  PasswordUser:password} )    
             .expect('Content-Type', /json/)
                 .end( function(err,res){
-                    console.log(res.body.token)
+
                   token=res.body.token   
                   expect(res).to.have.status(200);                
                  done();
@@ -162,7 +162,7 @@ describe('put', function(){
         .send({EmailUser: email,  PasswordUser:password} )    
         .expect('Content-Type', /json/)
             .end( function(err,res){
-                console.log(res.body.token)
+         
               token=res.body.token   
               expect(res).to.have.status(200);                
              done();
@@ -176,7 +176,8 @@ describe('put', function(){
         .expect('Content-Type', /json/)
         .end( function(err,res){
             id=res.body.data._id
-            console.log("el valor "+ id)
+   
+
             done();
            });          
         });  
@@ -231,7 +232,7 @@ describe('put', function(){
             .send({EmailUser: email,  PasswordUser:password} )    
             .expect('Content-Type', /json/)
                 .end( function(err,res){
-                    console.log(res.body.token)
+                  
                   token=res.body.token   
                   expect(res).to.have.status(200);                
                  done();
@@ -244,13 +245,13 @@ describe('put', function(){
         .expect('Content-Type', /json/)
         .end( function(err,res){
             id=res.body.data._id
-            console.log("el valor "+ id)
+            expect(res).to.have.status(200);
             done();
            });          
         });  
     
     it('Should  remove json museums', function(done){
-        console.log(id);
+       
      request.delete('/api/museums'+`/${id}`)
      .set('Authorization', token)
      .expect('Content-Type', /json/)
@@ -279,4 +280,247 @@ describe('put', function(){
 }); //la funcion museums
 
 
- 
+    //la funcion pieces
+describe('pieces', function() {   
+    
+    
+    describe('POST', function(){
+
+        let email = "testService@mia.com";
+        let password= "mia123";
+        let token = "";
+
+        it('Should  login', function(done){
+            request2.post('/api/login')
+            .send({EmailUser: email,  PasswordUser:password} )    
+            .expect('Content-Type', /json/)
+                .end( function(err,res){
+                  
+                  token=res.body.token   
+                  expect(res).to.have.status(200);                
+                 done();
+                });  
+            });
+
+    it('Should  insert json pieces', function(done){
+     request.post('/api/pieces')
+     .set('Authorization', token)
+     .send({
+       NamePieces:"test",
+        DescripPieces:"museo edificacion",
+         ImgPieces:"c://",
+          TokenPiece :"eawsdfghj234567890"
+     }
+     )
+     .expect('Content-Type', /json/)
+     .end( function(err,res){   
+     expect(res).to.have.status(200);
+     done();
+    });
+});
+    it('Should  not insert json pieces why NamePieces is empty', function(done){
+        request.post('/api/pieces')
+        .set('Authorization', token)
+        .send( {
+          NamePieces: "",
+           DescripPieces:"",
+            ImgPieces:"c://",
+             TokenPiece :"eawsdfghj234567890"
+        })
+        .expect('Content-Type', /json/)
+        .end( function(err,res){   
+        expect(res).to.have.status(500);
+        done();
+       });
+    });
+       
+       it('Should  not insert the pieces why reques json pieces  is empty', function(done){
+        request.post('/api/pieces')  
+        .set('Authorization', token)
+            .expect('Content-Type', /json/)
+            .end( function(err,res){   
+            expect(res).to.have.status(500);
+            done();
+       });
+   
+    });
+}); //end post pieces
+    
+    describe('GET', function(){
+        let email = "testService@mia.com";
+        let password= "mia123";
+        let token = "";
+        let id  ="";
+
+        it('Should  login', function(done){
+            request2.post('/api/login')
+            .send({EmailUser: email,  PasswordUser:password} )    
+            .expect('Content-Type', /json/)
+                .end( function(err,res){
+                  token=res.body.token   
+                  expect(res).to.have.status(200);                
+                 done();
+                });  
+            });
+
+      it('Should return json as default data format', function(done){
+          request.get('/api/pieces')
+          .set('Authorization', token)
+          .expect('Content-Type', /json/)
+          .end( function(err,res){   
+          expect(res).to.have.status(200);
+          done();
+      });
+    });
+    
+      it("should get a single name record", (done) => {                      
+       request.get('/api/pieces/name/test')
+       .set('Authorization', token)
+        .expect('Content-Type', /json/)
+        .end( function(err,res){
+            id=res.body.data._id
+            expect(res).to.have.status(200);
+            done();
+           });          
+        });  
+    
+              it("should get a single pieces record", (done) => {
+                 request.get('/api/pieces'+`/${id}`) 
+                 .set('Authorization', token)
+                 .expect('Content-Type', /json/)
+                 .end( function(err,res){
+                    expect(res).to.have.status(200);
+                    done();
+                      });   
+                    }); 
+                      
+                      it("should not get a single pieces record", (done) => {
+                        request.get('/api/pieces/123')
+                        .set('Authorization', token)
+                        .expect('Content-Type', /json/)
+                        .end( function(err,res){   
+                        expect(res).to.have.status(404);
+                        done();
+    });
+});
+});//end get pieces 
+
+
+  describe('put', function(){
+    
+    let email = "testService@mia.com";
+    let password= "mia123";
+    let token = "";
+    let id  ="";
+
+    it('Should  login', function(done){
+        request2.post('/api/login')
+        .send({EmailUser: email,  PasswordUser:password} )    
+        .expect('Content-Type', /json/)
+            .end( function(err,res){
+              token=res.body.token   
+              expect(res).to.have.status(200);                
+             done();
+            });  
+        });
+    
+    it("should get a single name record", (done) => {                      
+       request.get('/api/pieces/name/test')
+       .set('Authorization', token)
+        .expect('Content-Type', /json/)
+        .end( function(err,res){
+            id=res.body.data._id
+            expect(res).to.have.status(200);
+            done();
+           });          
+        });  
+    
+    it('Should  update json pieces', function(done){
+     request.put('/api/pieces/123')
+     .set('Authorization', token)
+     .send({
+       NamePieces: "test",
+        DescripPieces:"museo edificacion",
+         ImgPieces:"c://",
+          TokenPiece :"eawsdfghj234567890"
+     })
+     .expect('Content-Type', /json/)
+     .end( function(err,res){   
+     expect(res).to.have.status(404);
+     done();
+    });
+});
+    
+    it('Should  update json pieces  id ', function(done){
+     request.put('/api/pieces'+`/${id}`)
+     .set('Authorization', token)
+     .send({
+       NamePieces: "test",
+        DescripPieces:"museo edificacion",
+         ImgPieces:"c://",
+          TokenPiece :"eawsdfghj234567890"
+     })
+     .expect('Content-Type', /json/)
+     .end( function(err,res){   
+     expect(res).to.have.status(200);
+     done();
+    });
+    
+    });
+
+
+});//end put pieces
+    
+    
+    describe('delete', function(){
+        let email = "testService@mia.com";
+        let password= "mia123";
+        let token = "";
+        let id  ="";
+
+        it('Should  login', function(done){
+            request2.post('/api/login')
+            .send({EmailUser: email,  PasswordUser:password} )    
+            .expect('Content-Type', /json/)
+                .end( function(err,res){
+                  token=res.body.token   
+                  expect(res).to.have.status(200);                
+                 done();
+                });  
+            });
+    it("should get a single name record", (done) => {                      
+       request.get('/api/pieces/name/test')
+       .set('Authorization', token)
+        .expect('Content-Type', /json/)
+        .end( function(err,res){
+            id=res.body.data._id
+            expect(res).to.have.status(200);
+            done();
+           });          
+        });  
+    
+    it('Should  remove json pieces', function(done){
+    request.delete('/api/pieces'+`/${id}`)
+    .set('Authorization', token)
+    .expect('Content-Type', /json/)
+    .end( function(err,res){   
+    expect(res).to.have.status(200);
+    done();
+    });
+});
+    
+    it('Should  remove json museums', function(done){
+     request.delete('/api/pieces'+`/${id}`)
+     .set('Authorization', token)
+     .expect('Content-Type', /json/)
+     .end( function(err,res){   
+     expect(res).to.have.status(500);
+     done();
+    });
+    });
+    //la funcion pieces
+    });
+});
+
+
+
