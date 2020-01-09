@@ -82,11 +82,26 @@ var request2 = request2("http://localhost:8080")
     });
 });
 
-});
+}); //end function post
 
 
 describe('GET', function(){
-    let id="";
+    let email = "testService@mia.com";
+    let password= "mia123";
+    let token = "";
+    let id = "";
+
+    it('Should  login', function(done){
+        request2.post('/api/login')
+        .send({EmailUser: email,  PasswordUser:password} )    
+        .expect('Content-Type', /json/)
+            .end( function(err,res){
+              token=res.body.token   
+              expect(res).to.have.status(200);                
+             done();
+            });  
+        });
+
     it('Should return json as default data format', function(done){
         request.get('/api/museums')
         .set('Authorization', token)
@@ -103,7 +118,6 @@ describe('GET', function(){
         .expect('Content-Type', /json/)
         .end( function(err,res){
             id=res.body.data._id
-            console.log("el valor "+ id)
             expect(res).to.have.status(200);
             done();
            });          
@@ -111,8 +125,8 @@ describe('GET', function(){
 
 
     it("should not get a single museums record", (done) => {
-       const id = 1;
-       request.get('/api/museums'+`/${id}`)
+     
+       request.get('/api/museums/1')
        .set('Authorization', token)
        .expect('Content-Type', /json/)
         .end( function(err,res){   
@@ -138,7 +152,24 @@ describe('GET', function(){
 
 
 describe('put', function(){
+    let email = "testService@mia.com";
+    let password= "mia123";
+    let token = "";
     let id="";
+
+    it('Should  login', function(done){
+        request2.post('/api/login')
+        .send({EmailUser: email,  PasswordUser:password} )    
+        .expect('Content-Type', /json/)
+            .end( function(err,res){
+                console.log(res.body.token)
+              token=res.body.token   
+              expect(res).to.have.status(200);                
+             done();
+            });  
+        });
+
+
     it("should get a single name record", (done) => {                      
        request.get('/api/museums/name/test')
        .set('Authorization', token)
@@ -190,7 +221,23 @@ describe('put', function(){
     
     
     describe('delete', function(){
-    let id="";
+   let email = "testService@mia.com";
+        let password= "mia123";
+        let token = "";
+        let id  ="";
+
+        it('Should  login', function(done){
+            request2.post('/api/login')
+            .send({EmailUser: email,  PasswordUser:password} )    
+            .expect('Content-Type', /json/)
+                .end( function(err,res){
+                    console.log(res.body.token)
+                  token=res.body.token   
+                  expect(res).to.have.status(200);                
+                 done();
+                });  
+            });
+
     it("should get a single name record", (done) => {                      
        request.get('/api/museums/name/test')
        .set('Authorization', token)
@@ -226,6 +273,7 @@ describe('put', function(){
  });
     
 }); 
+
 
 
 }); //la funcion museums
