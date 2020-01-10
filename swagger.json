@@ -14,7 +14,8 @@
     "tags": [
       {
         "name": "Api:Museums",
-        "description": "API para el manejo de operaciones con Museums"
+        "description": "API para el manejo de operaciones con Museums",
+        "summary": "API para el manejo de operaciones con Museums"
       }
     ],
     "schemes": [
@@ -31,14 +32,25 @@
 
         "post": {
           "tags": [
-            ""
+            "Museums"
           ],
           "description": "Create new Museums in system",
+          "summary": "Create new Museums in system",
           "parameters": [
+            {
+              "name": "Authorization",
+              "in": "header",
+              "Description": "Authorization",
+              "schema": {
+              "type":"String",
+              "format":"String",
+              "required":true
+              }
+            },
             {
               "name": "Museums",
               "in": "body",
-              "description": "User that we want to create",
+              "description": "Museum that we want to create",
               "schema": {
                 "$ref": "#/definitions/Museums"
               }
@@ -62,7 +74,19 @@
           "tags": [
             "Museums"
           ],
+          "description":"Get all Museums in system",
           "summary": "Get all Museums in system",
+          "parameters": [
+            {
+              "name": "Authorization",
+              "in": "header",
+              "Description": "Authorization",
+              "schema": {
+              "type":"String",
+              "format":"String",
+              "required":true
+              }
+            }],
           "responses": {
             "200": {
               "description": "OK",
@@ -73,13 +97,23 @@
           }
         }
       },
-      "/museums/{museumsId}": {
+      "/museums/name/{NameMuseum}": {
         "parameters": [
           {
-            "name": "museums",
+            "name": "Authorization",
+            "in": "header",
+            "Description": "Authorization",
+            "schema": {
+            "type":"String",
+            "format":"String",
+            "required":true
+            }
+          },
+          {
+            "name": "NameMuseum",
             "in": "path",
             "required": true,
-            "description": "ID of museums that we want to find",
+            "description": "NameMuseum of NameMuseum that we want to find",
             "type": "string"
           }
         ],
@@ -87,7 +121,8 @@
           "tags": [
             "Museums"
           ],
-          "summary": "Get Museums with given ID",
+          "summary": "Get Museums with given NameMuseum",
+          "description":"Get Museums with given NameMuseum",
           "responses": {
             "200": {
               "description": "User is found",
@@ -96,27 +131,74 @@
               }
             }
           }
-        },
-        "delete": {
-          "summary": "Delete museums with given ID",
+        }
+
+      },
+    
+
+      "/museums/{museumsId}": {
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "Description": "Authorization",
+            "schema": {
+            "type":"String",
+            "format":"String",
+            "required":true
+            }
+          },
+          {
+            "name": "museumsId",
+            "in": "path",
+            "required": true,
+            "description": "ID of museumsId that we want to find",
+            "type": "string"
+          }
+        ],
+        "get": {
           "tags": [
             "Museums"
           ],
+          "summary": "Get Museums with given ID",
+          "description":"Get Museums with given ID",
           "responses": {
             "200": {
-              "description": "museums is deleted",
+              "description": "User is found",
               "schema": {
                 "$ref": "#/definitions/Museums"
               }
             }
           }
-        },
+        
+      
+      },
+
         "put": {
           "summary": "Update museums with give ID",
+          "description":"Update museums with give ID",
           "tags": [
             "Museums"
           ],
           "parameters": [
+            {
+              "name": "Authorization",
+              "in": "header",
+              "Description": "Authorization",
+              "schema": {
+              "type":"String",
+              "format":"String",
+              "required":true
+              }
+            },
+            {
+              "name": "museumsId",
+              "in": "path",
+              "required": true,
+              "description": "ID of museumsId that we want to find",
+              "type": "string"
+            }
+          ,
             {
               "name": "museums",
               "in": "body",
@@ -134,59 +216,135 @@
               }
             }
           }
+        },
+        "delete": {
+          "summary": "Delete museums with given ID",
+          "description":"Delete museums with given ID",
+          "tags": [
+            "Museums"
+          ],
+          "parameters": [
+            {
+              "name": "Authorization",
+              "in": "header",
+              "Description": "Authorization",
+              "schema": {
+              "type":"String",
+              "format":"String",
+              "required":true
+              }
+            },
+            {
+              "name": "museumsId",
+              "in": "path",
+              "required": true,
+              "description": "ID of museumsId that we want to find",
+              "type": "string"
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "museums is deleted",
+              "schema": {
+                "$ref": "#/definitions/Museums"
+              }
+            }
+          }
+        }
+      
+      }  ,
+      
+      
+      
+      "/museums/piece/{museumsId}": {
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "Description": "Authorization",
+            "schema": {
+            "type":"String",
+            "format":"String",
+            "required":true
+            }
+          },
+          {
+            "name": "museumsId",
+            "in": "path",
+            "required": true,
+            "description": "museumsId of museumsId that we want to find",
+            "type": "string"
+          },
+
+          {
+            "name": "museums",
+            "in": "body",
+            "description": "User with new values of properties",
+            "schema": {
+              "type": "array",
+              "$ref": "#/definitions/Pieza"
+            }
+          }
+          
+        ], 
+         "summary": "Update Pieces Museums with given ID",
+        "description":"Update Pieces Museums with given ID",
+        "put": {
+          "tags": [
+            "Museums"
+          ],
+        "responses": {
+          "200": {
+            "description": "Museum is found",
+            "schema": {
+              "type": "array",
+              "$ref": "#/definitions/Museums"
+            }
+          }
         }
       }
+    }
+      
+
     },
     "definitions": {
       "Museums": {
         "required": [
-          
-          
-            "DateBeginEvent",
-            "DateEndEvent",
-            "NameEvent",
-            "DescriptEvent",
-            "OffertEvent",
-            "ImgEvent",
-            "StatusEvent"
+            "NameMuseum",
+            "DescriptMuseum",
+            "TokenMuseum",
+            "Pieces"
+        
         ],
         "properties": {
           "_id": {
             "type": "string",
             "uniqueItems": true
-          },
-          "DateBeginEvent": {
-            "type": "date",
-            "uniqueItems": true
-          },
-          "DateEndEvent": {
-            "type": "date",
-            "uniqueItems": true
-          },
-          "NameEvent": {
+          },     
+          "NameMuseum": {
             "type": "string",
             "uniqueItems": true
           },
-          "DescriptEvent": {
+          "DescriptMuseum": {
             "type": "string",
             "uniqueItems": true
           },
-          "OffertEvent": {
+          "TokenMuseum": {
             "type": "string",
             "uniqueItems": true
           },
-          "ImgEvent": {
-            "type": "boolean",
-            "uniqueItems": true
-          },
-          "StatusEvent": {
-            "type": "boolean",
-            "uniqueItems": true
+          
+          "Pieces": {
+            "type": "array",
+            "items": { "$ref": "#/definitions/Pieces" }
           }
+        
          
         }
-      }
-    },
+      },
+      
+      
+     
 
       "Pieces": {
         "required": [
@@ -221,8 +379,27 @@
           }
          
         }
-      }
+      },
+
+      "Pieza": {
+        "required": [ "Pieces" ],
+        "type": "object",
+        "properties": {
+          "Pieces": {
+            "type": "string"
+    
     }
+  
+  }
+    }
+
+
+  }
+}
+
+
+  
+
 
 
 
