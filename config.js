@@ -1,5 +1,11 @@
-module.exports={
- 
-    SECRET_TOKEN:'MICLAVETOKEN'
+
+module.exports = {
+
+    SECRET_TOKEN: 'MICLAVETOKEN',
+
+
+
+
 
 }
+
