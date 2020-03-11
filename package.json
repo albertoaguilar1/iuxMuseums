@@ -1,5 +1,5 @@
 {
-  "name": "exatamuseum",
+  "name": "iuxmuseum",
   "version": "1.0.0",
   "description": "microservicio Museum",
   "main": "index.js",
@@ -10,7 +10,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/albertoaguilar1/exataMuseum.git"
+    "url": "git+https://github.com/albertoaguilar1/iuxMuseum.git"
   },
   "keywords": [
     "museum"
@@ -18,9 +18,9 @@
   "author": "jaguilarh",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/albertoaguilar1/exataMuseum/issues"
+    "url": "https://github.com/albertoaguilar1/iuxMuseum/issues"
   },
-  "homepage": "https://github.com/albertoaguilar1/exataMuseum#readme",
+  "homepage": "https://github.com/albertoaguilar1/iuxMuseum#readme",
   "dependencies": {
     "bcrypt-nodejs": "0.0.3",
     "bcryptjs": "^2.4.3",
